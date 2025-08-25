@@ -15,20 +15,21 @@
             <a href="https://builder.aws.com/community/@roona" target="_blank" class="aws-link">AWS Builder Center Profile</a>
         </section>
 
+        <!-- Updated Fun Facts Section -->
         <section class="fun-facts">
             <h3>Fun Facts About Me</h3>
             <div class="facts-grid">
                 <div class="fact-card">
-                    <h4>🚀 Challenge In Progress</h4>
-                    <p>Currently working on <a href="https://builder.aws.com/content/31C2WxIDSQive7q2Dv5xNFCmYJj/aws-builder-challenge-2-build-a-website-on-the-cloud?trk=86c76c09-e8f4-4138-badc-604ce7bc5d77&sc_channel=el" target="_blank">AWS Builder Challenge #2: Build a website on the cloud!</a></p>
+                    <h4>🚀 Cloud Milestone</h4>
+                    <p>Completed <strong>AWS Cloud Practitioner</strong> & <strong>Builder Challenge #2</strong>, deploying websites using S3 & CloudFront!</p>
                 </div>
                 <div class="fact-card">
-                    <h4>🎯 Learning Goal</h4>
-                    <p>Building my skills one AWS service at a time - S3, CloudFront, and beyond!</p>
+                    <h4>🎯 Skill Set</h4>
+                    <p>Hands-on experience with AWS services: S3, CloudFront, Lambda, DynamoDB, and CloudFormation for infrastructure automation.</p>
                 </div>
                 <div class="fact-card">
-                    <h4>💡 Fun Project</h4>
-                    <p>This website is hosted on Amazon S3 with CloudFront for global delivery!</p>
+                    <h4>💡 Projects</h4>
+                    <p>Built a <strong>To-Do List app</strong> project. Check it out on my <a href="https://proona.github.io/todo-app/" target="_blank">GitHub Pages link</a>!</p>
                 </div>
             </div>
         </section>
@@ -39,14 +40,12 @@
             <a href="https://builder.aws.com/content/31C2WxIDSQive7q2Dv5xNFCmYJj/aws-builder-challenge-2-build-a-website-on-the-cloud?trk=86c76c09-e8f4-4138-badc-604ce7bc5d77&sc_channel=el" target="_blank" class="cta-button">View Challenge Details</a>
         </section>
 
-        <!-- CONTACT FORM SECTION - Added for user contact functionality -->
+        <!-- CONTACT FORM SECTION -->
         <section class="contact-form">
             <h3>Get In Touch</h3>
             <p>Have a question or want to connect? Send me a message!</p>
-            <!-- Form message container for success/error messages -->
             <div id="form-message" class="form-message" style="display: none;"></div>
             <form class="contact-form-container">
-                <!-- Contact form input fields -->
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" required>
@@ -59,7 +58,6 @@
                     <label for="message">Message</label>
                     <textarea id="message" name="message" rows="5" required></textarea>
                 </div>
-                <!-- Contact form submit button -->
                 <button type="submit" class="contact-submit-btn">Send Message</button>
             </form>
         </section>
@@ -71,30 +69,27 @@
     </footer>
 
     <script>
-        // Contact form handler - Sends form data to AWS Lambda
-        const LAMBDA_URL = 'https://ue5bwdtv7nsxyjnhhvohdljrsq0hbxvz.lambda-url.us-east-2.on.aws/'; // Replace with your Function URL
-        
+        const LAMBDA_URL = 'https://ue5bwdtv7nsxyjnhhvohdljrsq0hbxvz.lambda-url.us-east-2.on.aws/';
+
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.querySelector('.contact-form-container');
-        
+
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
-        
+
                 const submitBtn = form.querySelector('.contact-submit-btn');
                 const messageDiv = document.getElementById('form-message');
-        
-                // Show loading state
+
                 submitBtn.textContent = 'Sending...';
                 submitBtn.disabled = true;
                 messageDiv.style.display = 'none';
-        
-                // Get form data
+
                 const formData = {
                     name: form.name.value,
                     email: form.email.value,
                     message: form.message.value
                 };
-        
+
                 try {
                     const response = await fetch(LAMBDA_URL, {
                         method: 'POST',
@@ -103,7 +98,7 @@
                         },
                         body: JSON.stringify(formData)
                     });
-        
+
                     if (response.ok) {
                         showMessage('Message sent successfully! Thank you for reaching out.', 'success');
                         form.reset();
@@ -113,20 +108,18 @@
                 } catch (error) {
                     showMessage('Network error. Please check your connection and try again.', 'error');
                 }
-        
-                // Reset button
+
                 submitBtn.textContent = 'Send Message';
                 submitBtn.disabled = false;
             });
         });
-        
+
         function showMessage(text, type) {
             const messageDiv = document.getElementById('form-message');
             messageDiv.textContent = text;
             messageDiv.className = `form-message ${type}`;
             messageDiv.style.display = 'block';
-        
-            // Auto-hide after 10 seconds
+
             setTimeout(() => {
                 messageDiv.style.display = 'none';
             }, 10000);
@@ -134,4 +127,3 @@
     </script>
 </body>
 </html>
-
